@@ -80,34 +80,31 @@ def diagnals(coordinate):
     if x1 != x2 and y1 != y2 :
         
         line_found = True
-        # This isnt 
-        # if y1 < y2:
-        #     y_small = y1
-        #     y_large = y2
-        # else:
-        #     y_small = y2
-        #     y_large = y1
-
-        # if x1 < x2:
-        #     x_small = x1
-        #     x_large = x2
-        # else:
-        #     x_small = x2
-        #     x_large = x1
-        
         direction = 1
         # multiplied later to change the step direction
         if x1 < x2:
-            direction = 1
+            hori_direction = 1
         else:
-            direction = -1
-     # every other point on the line is one down and left or right from previous point depending on direction. because 45 degrees.
+            hori_direction = -1
+        
         if y1 < y2:
-            for i,j in enumerate(range(y1,y2+1)):
-                idx.append((1000*j)+(i*direction))
-        else:
-            for i,j in enumerate(range(y2,y1+1)):
-                idx.append((1000*j)+(i*direction))            
+            veri_direction = 1
+        else: 
+            veri_direction = -1
+
+        # every other point on the line is one down or up and left or right from previous point depending on direction. 
+        # because 45 degrees.
+        not_dest = True
+        y_start = y1
+        x_start = x1
+        while(not_dest): 
+            idx.append((1000*(y_start)+(x_start*direction)))
+            if y_start == y2 and x_start == x2:
+                not_dest = False
+            y_start += veri_direction
+            x_start += hori_direction
+
+
 
     if line_found:
         return idx
