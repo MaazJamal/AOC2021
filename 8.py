@@ -20,14 +20,24 @@ for _,output in data:
 
 print(unique_digits)
 
+def odd1out(one,two):
+    l = -1
+    for letter in one:
+        if two.find(letter) == -1:
+            l = letter
+            break
+    return l
 
 def patterns(raw : list):
 
     raw = ["".join(sorted(x)) for x in raw]
     raw.sort(key=lambda val: len(val) )
-    two,seven,four,eight = raw[0],raw[1],raw[2],raw[9]
-    a = list(difflib.ndiff(two,seven))[0][-1]
-    
+    one,seven,four,eight = raw[0],raw[1],raw[2],raw[9]
+    a = list(difflib.ndiff(one,seven))[0][-1]
+    nine_zero_idx = [idx+6 for idx,x in enumerate(raw[6:9]) if x.find(one[0]) != -1 and x.find(one[1]) != -1]
+    six_idx = [idx+6 for idx,x in enumerate(raw[6:9]) if x.find(one[0]) == -1 or x.find(one[1]) == -1][0]
+    six = raw[six_idx]
+    c = odd1out(one,six)
 # digit : segments
 # by convnetion my segments are:
 #   aaaa    
